@@ -11,6 +11,7 @@ var PORT = 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Star Wars Characters (DATA)
 // =============================================================
@@ -43,6 +44,7 @@ var characters = [
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
+  console.log(__dirname)
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
@@ -51,10 +53,7 @@ app.get("/notes", function(req, res) {
 });
 
 // Displays all characters
-app.get("/api/notes", function(req, res) {
-  console.log(res.json(characters))
-  return res.json(characters);
-});
+app.get("/api/notes", function(req, res) {});
 
 // Displays a single character, or returns false
 app.get("/api/characters/:character", function(req, res) {
