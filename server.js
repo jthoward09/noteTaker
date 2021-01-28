@@ -14,7 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// Data 
+// Data from database file
+let savedNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
 
 // Routes
 // =============================================================
@@ -33,6 +34,22 @@ app.get("/api/notes", function(req, res) {
   res.json(savedNotes);
 });
 
+app.post("/api/notes", function(req, res) {
+  // Grab the new note from the form
+  const newNote = req.body;
+
+  // Push this note to the file
+  savedNotes.push(newNote);
+
+  // Take the data and stringify
+  let saveData = JSON.stringify(savedNotes);
+
+  // Write new data to file.
+  fs.writeFileSync('./db/db.json', saveData)
+
+  res.json(true);
+
+});
 
 // Starts the server to begin listening
 // =============================================================
