@@ -51,6 +51,17 @@ app.post("/api/notes", function(req, res) {
 
 });
 
+app.delete("/api/notes/:id", function(req, res) {
+  var noteToDelete = req.params.id;
+
+  const savedNotesIndex = savedNotes.findIndex(p => p.id == noteToDelete);
+  
+  savedNotes.splice(savedNotesIndex, 1);
+
+  return res.send();
+
+});
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
