@@ -52,10 +52,13 @@ app.post("/api/notes", function(req, res) {
 });
 
 app.delete("/api/notes/:id", function(req, res) {
+  // Grab the id of note to delete
   var noteToDelete = req.params.id;
 
+  // Get the index of the saved Note index
   const savedNotesIndex = savedNotes.findIndex(p => p.id == noteToDelete);
   
+  // Remove that note from the file
   savedNotes.splice(savedNotesIndex, 1);
 
   return res.send();
