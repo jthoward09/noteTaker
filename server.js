@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Data 
-var savedNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));;
 
 // Routes
 // =============================================================
